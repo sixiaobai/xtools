@@ -23,7 +23,7 @@ func trimPath(basePath string) string {
 func genRpcAuth() (string, string) {
 	now := strconv.Itoa(int(time.Now().Unix()))
 	md5Ctx := md5.New()
-	md5Ctx.Write([]byte(appId + "&" + now + appKey))
+	md5Ctx.Write([]byte(appId + appKey + now))
 	cipherStr := md5Ctx.Sum(nil)
 	signstr := hex.EncodeToString(cipherStr)
 	return now, signstr
@@ -32,7 +32,7 @@ func genRpcAuth() (string, string) {
 func genRpcAuthCtx(appId, appKey string) (string, string) {
 	now := strconv.Itoa(int(time.Now().Unix()))
 	md5Ctx := md5.New()
-	md5Ctx.Write([]byte(appId + "&" + now + appKey))
+	md5Ctx.Write([]byte(appId + appKey + now))
 	cipherStr := md5Ctx.Sum(nil)
 	signstr := hex.EncodeToString(cipherStr)
 	return now, signstr
